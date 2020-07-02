@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hardware," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="IntroductionIn this application, the transmission is based on UDP (User Datagram Protocol), while the network is based on IPV6. The transmitter can read the sensor values of the external light sensor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Simply WSN  Application">
+<meta property="og:url" content="http://yoursite.com/2019/05/26/WSNprojct/index.html">
+<meta property="og:site_name" content="ZIQIN&#39;S BLOG">
+<meta property="og:description" content="IntroductionIn this application, the transmission is based on UDP (User Datagram Protocol), while the network is based on IPV6. The transmitter can read the sensor values of the external light sensor">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/m2acovV.png?1">
+<meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn%253AANd9GcTN8k_kz5AuEbyBmiGd9_ho_jNAyuUlK-Dk_w&usqp=CAU">
+<meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOsAAADWCAMAAAAHMIWUAAAA4VBMVEX///8AAABnZ2d0dHTBwcHJycm0tLTOzs7s7Oz7+/tNTU2hoaH39/fi4uLo6Ojv7+8AAP/V1dVSUlLd3d1fX19vb299fX2pqalaWlo3Nzc8PDwTE/9MTEyHh4fS0tKHh/+ZmZmQkJALCwtEREQuLi4iIiIcHP+KiooXFxevr6+np/+5ubkUFBQkJCT39/9VVf9+fv++vv/Hx/8oKP+Xl/9sbP/r6/90dP+wsP/T0/85Of/x8f+hof9mZv8sLP/f3/9cXP9NTf95ef/MzP9BQf+Ojv+3t//g4P+Cgv+urv9RUf8ND5NRAAASTklEQVR4nO2dCVvaShfHz0kCJGQj+0YwIQmLQK1abd21LrX9/h/onQnat4Z4b70EEOTv8zg4RMPPTGY5OecMOLz4N18q67LrLRugBn+nkfaXB75XMX/PWm8s9JMsXlvWUm1Z10hb1lJtWddIW9ZSbVnXSFvWUm1Z10hb1lJtWddIW9ZSbVnXSEtk5SxRmKl0bImzin+YHBay0nxnK9HyWKUEUZ6pZVEaptzLugh5cP11ZjUQ0SHFSHEiGaS6wUW1nNUQDfLH+45K3uzHHPA21qU6aQNqzMYSSCONi0b0/GE8+796i5bHyqLY9QBExAFiTUGqkLKKWBd0TBGVIQ48tBzECeehpCH6OJaN/Bf6oKM5QO7fz/O6lsaqeilvdjvgICPHGCo4adS6qWSj5OBIQ53vo+iYmoFNIUYNkjF5K1JjjAz0DA5dCTOtFq4Hax11ziKXxyHXRpnoBtoAVtfIWTkH6/QYmSXXukkuvQL+gKe3rIwMPZJPXaDvsco8H2FprGzeaH16FUEeMAQCwBwoU9YhuZNlm2Nw2Egpq0pZzYkMGrKUVZm4QmcoevQf9N+1LFYFU1nhdawNcSImKPLkFmRRn96vIxkHwwQ5JuPi/LrGajIWHGw7Po4MZCmrgWnDIS/n0LJYh2gB7ZisOu1pGCnvmzINmLxvoj0WxqR9oz9BmUMckb5JsGmlYJDfVLANMfkpNeb4CMufN9H7VaLX2YIXIyhPfxJeDqoS/2LyoarznXrprCIOaSGjW8Vfe5OWzqo5+YRAEv/2tNVpO/cv1ZZ1jbRlLdWWdY20ZS3VlnWN9OFZb+k34aFQu5msvXsQvh1+LtRuJutp8Pg1CD4G69lR7/B6v1i7iawPD/vfDi+/7p8U6jeQVWi1WsHhYa/1vXDoBrLC+e7uz5+7P3eLjXgTWYn292H/tli5maznwXe4aH2M8fXy9AD2767PXtbWN9IHPjgi3z7f/XhZO2oz6y22jPVX7/PD4+HRp5e1m3ld93tB0Psg9ysIu+e7Z4XLuqGsZ1/u7+93vhRqN5P1IugdBr3HQu1msp5e3B8e3N0XajeTtbdz0vt0PzO+biTrXW/37uLm+vhl7WayXl3vf2n1dgu1m8l6ciAIJ7sHhdpNZP1xsndzcntyffEB7tfz1uVlQDQzR9xA1oPH09P7nZ3HD2CDITo4gLPjmdpNZP2x9xm+t4LLIm0lrFOXLoze8jtavRqf0xLWm+DzcXB42tsp1FfCGvsedhN/+JbfiXBRrFeta9gNvsDFguZNKiYAnBn5nMzgJFZVpm9NXBkME7uRpLgxk7I8qCGiaUCdEX02QaaSpfMs637rAB6DW3gs2iUqYlXQzz1rsd5EVkdHQWz7yEAbHRcdGdEboAUWJiamQkSOY3w0O1WceZb1R2vn5Obm+OrXgsacnDX3LHSiTh9FBXWQsC1NxlHdUaiPl+SnXLcNYCMnYkj/MQu7X4PDu95X4TRYyP36m3UEgp2RqyZSbz01bUOd/OBxMsYgMJnTjakP41Ck3tHUJ74KlbBeHe1dHMPh1+Kh1bLWQSOQI8rKUFYlqit96i2cSIbna4NUERjsPLHO5Tb8W2Xj66dj0nqviiaY6lhzT/g6GJhaGUbUk1jNEhWRZTAk92vbI/8EFhM3v18Ja4zNBd2vr6qqfpglzbPGkk9fZ6yhHSmsA1IYg2yZZiTImIQMOQBE0w0l4FjSAxustaasr0sQqP/pszu0UHnQyntipZLnc3P/R5U/p8u1kud0glFNP1SmsuevQa4P8fz157dv3x4eHr59BLsE0fHD+cPMom4uVqOmkuGm9pdBYkaNdExyreLmXG5vuiNt+K7StbpNB0oH45e1Qhy+KH9/KmzQKYT48mjeKlS8UeW28N7O7vfLSufD4ZQ1operQeMx5EZHBcX18tgMRfdp5OD0HSKLsoo01FCrdejYYzQ0AbSxNdc4VP78lc4Pv/6q0j4ckglwzlpPERMjL3SDQUwpnkumwtJwQt6ZNnILa/S6OnlQjitBOCCzKtnHrjXHR3jF7v/rDI6v96plzSUaOOEiApaOO07iNJK0JqmqVEu8RgdTLsZEUFWVsOYa1tFtWIQSm0bsc/WxWX0s0kWw9/lXUOmYEyIjRiaKNHIO3IHho26JEjAJ9NttViKlg0MQ9DTSm67MoiVGLg5Z1IDP2gZ2TWsE/GS+eUYp6/HjZe/0a6XPX0PaKoeUlbRla2zIrNtFWzITiEwzVElJlzQCk4oMYymUkUYtWWSFo6aJxLFtRIfPFsAKn/ZP9mdiy6vom0QN20oN045pSxy6KuNJdBosmZ7UQJ3ncPqzNe2HyfKVlUQ0OT0iK56YnzBzfILXfAiCz3AUXBVqqxhzory36XLTO7JOC7oOJ0tV5Ok742kw79OY40gMDRhUaKg7Zh01paaq/65S1r3gHh6DYiOuZi4h1ByHNFCJcxyyUJM5Lm8/tBS4/J3fR9O5hDRyhmRGoZCCdEsGN9fa7h98fm4+xDPJw7vbs9ubSsec96ByH71eL+gF54XazWT9tH9zd7P7MXx+yDpnd7/adc570LLWOe9By1rnvActa53zHrSsdc570LLWOe9B5b6XO5e9y2rXOe9B5f3wydXJ1dVtYaWziazP/k0fwR/xVf+mSh4grVCv+Tfdz/o3jSJurVWzSv2bbvNHsB+C9eyoFbSKt+tGtmEyZeod3gSL8W9apcrniL/Iuu5D9MMg5I8jZ+KuNpIVfvUe97/3KrWtvQeV+5le0rirYlDoZrL+ODn/cl7shjeU9fSu7NDNZP3e+3Z1dbUQ/+FVqtzuf9g7vTv9GOPr169HR0cXC7QPK5g+v1RH//BMVahVmW2vPBbpCj4RFWorZf39EEouekX8KUFvV3bOUtb9w15QtKtRVcwasvHEG6km+iKI2YBVwGbj1GD6DPUSl61u6kCYZfZs3u3/qhLW08Ner/dz9tCKWduIDHYNl7A66LtoAn3y2EFs+mhBE80U6+EgYxfKGuzBcTDjPVw5q44yMKgoYwf0waijD4wmcnnuTxX1DrpaHV3BrDITaBnr9ycLcUEVszYHKtgoG11RTXNPEKM9lnI/UzV1R3mNrrp6ZecsZe3d3O739m4XmfsmZ+0+sUaCOVGgxglJl7JawKc6TTqsjjqS26zsnK/4+wfB4eFCfS+pH3yCKrCEFbNIRN/EieCTGpptmM/a4KHpYyzpyCz0fv28k+vxW6G+QlbqGx7ZEgwtFWIrghFjhgLEpIbPvcQjEGLTHAKMrMX2Ta9pofOmWSKhOsgnvRfWZejDs85MD3NtIuvZzsVRMS6fahNZ98gUMSgmvoE5WYXavNblztzm6bLx9fTk50wwHcy/l8Hvl+zo9eOEuP/KOxnO2zEva47Ik9kDr6iaJkAD6U4xmkZ970iNIKuKRl2klY4mgaInqiKDIPOgyhKoDRoiQF5pkjcWBGWuTWXKWC/gU3A0O+LNzWolTez25QzHlsrQoEhgEn2sec0UUw44jyx8VBcxcTO54zEQpTWDLH3SEYieizV/IESTqveo6F0GwellxXNEyqqjxaVoDLusYWM8mmRqE/3QQHQibKvjySjGsJZ4nSEOh4iK6fETFEcZ8hEOWMPzQqzc37/VWkAsEmV1UaEzYGUgCk207LSr6WiQO9kENWs2uqltoS6ZTRpnFiPWPIZOjiHGkUhtF+SyzxkHu6y5RM465unKRh6Lkj9mbdZWdLKum8b66hwmpCqSzDZI5jhzyNSfyzfZESlrjbJ6GP77if5BJaz3X6aqNN/a9LpOWQehwCAn2SyvdykrjfVtGt1E6liE1ZeoPzVp5chLXWwoPhp5xK+XNdJu1f7Drd60DVeak5eOOe2c1VAybBtevtsVXcXlsb4DH2gY/qBGPcSlBqLgkKYNo26+10xMWTOEIabzjDuzrCd3599+7u7unlcaT0fnElpDyKPHOlwH5LpDztshNVLNAKFBLlhjSH2/qYe4RA7m83g0zRFrAsjUTbzRIIfWqmU9aAVHBzMPc2Aj54ifbndarb2dHzOHbiAr1f7Xy9bpx4gJ/XEGV+czSRc2kXX/MMjt/h/hOd0S7P6r0Wrs/qvRauz+q9Fq7P6r0Wrs/qvRW+z+G5lXutRkupH5wn/sXf6Ah1Yx1fJGXtej3ukP2G8FC3x2tRrNsp61bmgbPjidM5+pnFsA/z1TCF3TPb96teVI3Fy7F09Vlltu6uzzdc5YXzvPDfg7U8irVuF8h99cxh/eMdZLtj5WkF9ulvW4dU0XxFc3c/oPhzS7ZY2yGh1y5RrdvioroMoqKLLwlD2E2odzu4RMU7/I2M5rDIH8XvSnDVluTjgQNPp3SG3ntzV5XlY47R3tHpzv9ea0wRDWiUpZowwHsUK+6e0miJkIrq/WJ3n2kNw+jBaYAydnbYKZtHEcGxmObdVE9BugJ83UR/R4m/xBG2i4fjqEkYfIvnHv27I8ejdBL+j1ruf05QpRRLaBUQPdGoOj4ZjVbDQY1JWxrWFKs4fA1D7MmFN/LsqaIMtlqDhoGyxG9SyVfEz6XJJyNVLloRoiW8esQf5AiK89Dvl7Vjg7v764eJjXpzZE8mnjbiRiM9Qx5rOIpgZpd5MRNXU7ILgDeWofRpx6p01ZVWCQl9GRkq5lTwZGgjJIbiJJQ9vOUGYyA7RGHT2beevWwCWsMxuY/WdWJUUUYzRt2xrJgwjkSerVPS9T8uwhDGHN7cPjCY5+sw4ksJA30FG9AbUh834mEFZfqmO776HsegrIxhDbts1Gc7PmGReqYNWoHTQaoQ0Ow8kDG8hV83gPfehMs4cIzal9eIS+8MzafWKNBbNbU21b9cdSzhpjB3zkWXQUP+WwLdTems6pjPX6JNeceUNsmtMlIX0Tzf3hq8oEqQ3YBJfenE/ZQ57tw0yePY+OOR4ZWxhUZERTS3Pj8ITUSM1Uou5dE+wYE5ouKM8bNHnj5Kb02VWPat51jjzNIybTFCF10mNSqzBP5g15TpCnHCHP9mE+fxJN5xKd3IYsQIPTwHiyIQMdbsg4NGwYNQWMIa2FhjN86wPKMtbT71+Jjj5Cfglyv376tFj/4dWo7HnORfmhm8j6MLNb21SbyPqatqxvlUHmAGz8SpZHqd/PJ/Qh+zyvV9h6FWfNtXRWDjEbIz6fVNDTP97kszyFIFkdPLPmbgQVaQWsfdnoo05ehZEBjbbXAEkMhzmcmk5zQw5FkDlZJO9Tp2ltVE3kygpYI3I1kwnPoJdhnazbPI2s76Z+H8+sKUpkeknmTTUZwwZiNZauFbFa3Zplqw6KPFnMaokj0EiH/7P6Y0FEiw9pvv8kzSoKSFoNq+SlPNfMJ7ZmAlJEk9/PsHLkWLq3ATYr8ppeAatIv/lyN2mQ6yoQ1iGGZA0/Zc0XPM+sI8qa+jRVZhVaAavH+IicPDZrLmUd1EWy8Os+saLXTppG8gdryE/fm1+rGHNIr1PP0z/q6Eo26YAGpJ3mF48fTCN1UhQisn6vo0P7Yfu3pXE+rXDeJP3/Nqw8vX2ptnPEUm1Z10hb1lJtWddIW9ZSbVnXSFvWUm1Z10hb1lJtWddIW9ZSbaKP3msaeXrTontHME+lOS0NUrLFUvqjdMtLjZT2cyn8UerTsvNnCbNlo/n/kgbaNdovy1qxLM3x+S+sZvNFafxRss9lztQsZ2QYhnrrkFJnpVnGIqvmmvoL1maBta23n8sntpdl8lS+gbWaNuxgo0/tZ00N3MGsncmgYXQvzoq1cHH7v76mSvomKTXBxtQd59lvZhkUpuDcMkJOmTMW9FnLZqWhrDbdHUcfGHoWZh6nWuQGEN3OdL9mlXVADcdZX4VRivqIsoI9mGufq2ctm3UaA8uBklKvNTRxzDNYE9qZ0nzarznfq9nD2MBBOEaJstKtsCrQklmlVJcIKxUDTVTARGVEuWzInvZrZtWxB5IdyfFQS1ClrJ1qGvGyWb2c1YzjIQ/NcZ6tSh2YDmnZz/s1s09bwBo6/Y/krMZbvSzLtXTWJmWdnpJ66LEo0+ucCPzzfs30uqpyl6XBzMyUtVHcm/G/aRX3K4tTp++nzFwEhbA87ddMfQZc1BN0RHQZpC2cy3eyrkDLZuXIx65b026VZuZyLB6E9kCDp/2aaV6uaU4uqW/2HYvTbA2stJJNx5fNqqYz2eIkceDnL/6fiWv66vlHeU3HV+D84vk0HP/zRwiTah6sL39NpxQnS1LnX2YKyhv9+l/TW9Y5G7Cmc3jxb75U1mXXWzb8DzcgtGYcHiDIAAAAAElFTkSuQmCC">
+<meta property="og:image" content="http://yoursite.com/images/wsnimg/wsn1.png">
+<meta property="og:image" content="http://yoursite.com/images/wsnimg/transmitter.png">
+<meta property="og:image" content="http://yoursite.com/images/wsnimg/receiver.png">
+<meta property="og:image" content="http://yoursite.com/images/wsnimg/formula1.png">
+<meta property="og:image" content="http://yoursite.com/images/wsnimg/formula2.png">
+<meta property="og:image" content="http://yoursite.com/images/wsnimg/toutput.png">
+<meta property="og:image" content="http://yoursite.com/images/wsnimg/routput.png">
+<meta property="article:published_time" content="2019-05-26T10:12:57.000Z">
+<meta property="article:modified_time" content="2020-07-02T21:20:39.809Z">
+<meta property="article:author" content="Ziqin Tang">
+<meta property="article:tag" content="Hardware">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/m2acovV.png?1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/26/WSNprojct/"/>
+
+
+
+
+
+  <title>Simply WSN  Application | ZIQIN'S BLOG</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZIQIN'S BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-instagram">
+          <a href="/instagram/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-instagram"></i> <br />
+            
+            instagram
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/26/WSNprojct/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ziqin Tang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZIQIN'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Simply WSN  Application</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-26T12:12:57+02:00">
+                2019-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WSN/" itemprop="url" rel="index">
+                    <span itemprop="name">WSN</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WSN/contiki/" itemprop="url" rel="index">
+                    <span itemprop="name">contiki</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><strong>Introduction</strong></h3><p>In this application, the transmission is based on UDP (User Datagram Protocol), while the network is based on IPV6. The transmitter can read the sensor values of the external light sensor and the internal temperature sensor, and periodically transmit the acquired values to the receiving node that should display the data. In addition, every time the user button on the sending node is pressed, the receiving node should be notified that the button is pressed to represent the occupied state of the room. The generated data packet should include a counter, temperature and light value, the counter represents the number of data packets sent by the sender since startup. Finally, when the room is not occupied, each time the user button of the receiver is pressed, the LED on the sending node will switch once.</p>
+<h3 id="Technologies"><a href="#Technologies" class="headerlink" title="Technologies"></a><strong>Technologies</strong></h3><h4 id="1️⃣-Sensor-node-platform"><a href="#1️⃣-Sensor-node-platform" class="headerlink" title="1️⃣ Sensor node platform"></a>1️⃣ Sensor node platform</h4><img src="https://i.imgur.com/m2acovV.png?1" width="200" height="200" >
+Zolertia Firefly Revision A2 is a wireless hardware development platform designed to build true Internet of Things (IoT) applications and products for skilled developers, manufacturers (hands-on enthusiasts) and beginners for industry use. product and service. You can quickly list flexible hardware solutions. Firefly solves the problem of ultra-low power consumption through high-performance design, and meets the specifications of processing resources, security and flexible operation. Firefly exposes most CC2538/CC1200 pins to enable flexible and affordable prototypes, compatible with breadboards and battery holders, which simplifies development and testing.
+
+<h4 id="2️⃣-Light-sensor-5516-Photoresistor-Light-Sensor-Module"><a href="#2️⃣-Light-sensor-5516-Photoresistor-Light-Sensor-Module" class="headerlink" title="2️⃣ Light sensor(5516 Photoresistor Light Sensor Module)"></a>2️⃣ Light sensor(5516 Photoresistor Light Sensor Module)</h4><p>Photoresistor is a kind of resistor made by using the photoconductive effect of semiconductor to change the resistance value with the intensity of incident light, also known as photoconductive detector; incident light intensity, resistance decreases, incident light is weak, resistance Increase. There is another kind of weak incident light, the resistance decreases, the incident light intensity, the resistance increases.<br><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTN8k_kz5AuEbyBmiGd9_ho_jNAyuUlK-Dk_w&usqp=CAU" width="200" height="200" ></p>
+<p>Photoresistors are generally used for light measurement, light control, and photoelectric conversion (converting changes in light into changes in electricity). Commonly used photoresistors are cadmium sulfide photoresistors, which are made of semiconductor materials. The photoresistor’s sensitivity to light (that is, spectral characteristics) is very close to the human eye’s response to visible light (0.4~0.76) μm. As long as the human eye can sense the light, it will cause its resistance to change.  </p>
+<p>For 5516 photoresistor :  </p>
+<ul>
+<li>Operating Temperature-30 ~ +70 deg </li>
+<li>Spectral Peak: 540nm</li>
+<li>Light Resistance (at 10 Lux): 5-10 Kohm</li>
+</ul>
+<h4 id="3️⃣-Protocols"><a href="#3️⃣-Protocols" class="headerlink" title="3️⃣ Protocols"></a>3️⃣ Protocols</h4><ol>
+<li>IPV6</br></li>
+</ol>
+<p><strong>Concepts</strong>:IPv6 is the abbreviation of English “Internet Protocol Version 6” , and is the next generation IP protocol designed by the Internet Engineering Task Force (IETF) to replace IPv4. The number of addresses can be claimed as every Grain sand with an address. </p>
+<img src="data:image/png;base64,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" width="200" height="200" >
+
+<p>IPv6 is located at the third layer of the Internet protocol stack, the network layer. The data processed by layer 3 is data packets. The device that connects it to the Internet is a host or router. The host can choose a PC, a portable computer or a sensor board for sending and/or receiving data packets. The host is the source or destination of the packet. The router is responsible for packet forwarding and is responsible for selecting the next router to forward it to its final destination. The Internet consists of many interconnected routers. They receive data packets on one interface, and then use another interface to send data packets to another transit router as fast as possible.<br>The length of the IPv6 address is 128 bits, which is 4 times the length of the IPv4 address. So IPv4 dotted decimal format is no longer suitable for IPv6 address format, using hexadecimal representation. There are three ways to represent IPv6:</p>
+<p><font size =1 color="8b8687"><strong>(a)Hexadecimal notation</strong><br>The format is X:X:X:X:X:X:X:X, where each X represents 16b in the address, expressed in hexadecimal, for example: ABCD:EF01:2345:6789:ABCD:EF01:2345 :6789</p>
+<p><strong>(b)0-bit compressed representation</strong><br>In some cases, an IPv6 address may contain a long period of 0s, which can be compressed into “::”. However, to ensure the uniqueness of address resolution, “::” can only appear once in the address, for example: FF01:0:0:0:0:0:0:1101 → FF01::1101</p>
+<p><strong>(c)Embedded IPv4 address notation</strong><br>In order to achieve IPv4-IPv6 interworking, the IPv4 address will be embedded in the IPv6 address. At this time, the address is often expressed as: X:X:X:X:X:X:dddd, the first 96b is expressed in hex, and the last 32b The address is expressed in dotted decimal notation of IPv4, for example ::192.168.0.1<br></font></p>
+<p>The IPv6 protocol mainly defines three types of addresses: Unicast Address, Multicast Address, and Anycast Address:</p>
+<p><font size =1 color="8b8687"><strong>(a)Unicast address</strong><br>used to uniquely identify an interface. Data packets sent to a unicast address will be transmitted to an interface identified by this address.</p>
+<p><strong>(b)Multicast address</strong><br>used to identify a group of interfaces (usually this group of interfaces belong to different nodes). Data packets sent to the multicast address are transmitted to all the interfaces identified by this address.</p>
+<p><strong>(c)Anycast address</strong><br>used to identify a group of interfaces (usually this group of interfaces belongs to different nodes). The data packet sent to the anycast address is transmitted to the one of the set of interfaces identified by this address that is closest to the source node (measured according to the routing protocol used).</font></p>
+<p><strong>Transport</strong>: It is a layer above the network layer, which provides additional functions for the network layer, such as retransmitting lost packets or ensuring that the order of sending and receiving packets is the same. This layer will show the application layer “ “Network Services” layer, they provide services for sending or receiving data. TCP and UDP are the most commonly used transmission protocols in the Internet.</p>
+<ol start="2">
+<li>UDP</br></li>
+</ol>
+<p><strong>Concepts</strong>:User Datagram Protocol (UDP) is a simple transport layer protocol for connectionless, unreliable datagrams. In the TCP/IP model, UDP provides a simple method above the network layer and below the application layer The interface. UDP only provides unreliable delivery of data. Once it sends the data sent by the application to the network layer, it does not retain the data backup (so UDP is sometimes considered to be an unreliable datagram protocol).<br>Unlike TCP, UDP does not provide message fragmentation and reassembling at the other end, this means that the application must be able to make sure that the entire message has arrived and is in the right order.</p>
+<p><strong>Features</strong>:<br>① UDP is connectionless, that is, there is no need to establish a connection before sending data (of course, there is no connection to release at the end of sending data), so the overhead and delay before sending data are reduced;<br>② UDP uses best effort delivery, that is, reliable delivery is not guaranteed, so the host does not need to maintain a complicated connection status table;<br>③ UDP is oriented to the message;<br>④ UDP has no congestion control;<br>⑤ UDP supports one-to-one, one-to-many, many-to-one, and many-to-many interactive communication;</p>
+<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a><strong>Implementation</strong></h3><ul>
+<li><strong>Temperature</strong></br></li>
+</ul>
+<p>The sending node senses the temperature inside the main board and outside the event board. Then convert these temperature values into Celsius temperature output.<br>The driver can return the original value and converted value of the sensor reading. This is controlled by the type parameter of the value() function of the sensor driver. The choice of type parameters is:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CC2538_SENSORS_VALUE_TYPE_RAW (value() returns the raw reading)</span><br><span class="line">CC2538_SENSORS_VALUE_TYPE_CONVERTED (value() returns degrees mC)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Light</strong></br><br>Since the light sensor is external to the node, we need to call the sensor interface value to get the light value.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#define MOTION_SENSOR_PORT       GPIO_A_NUM</span><br><span class="line">#define MOTION_SENSOR_PIN        5</span><br><span class="line">#define MOTION_SENSOR_VECTOR     NVIC_INT_GPIO_PORT_A</span><br><span class="line">#define ADC_PIN 5</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>Active the light sensor<br><code>adc_sensor.configure(ANALOG_GROVE_LIGHT,5);</code></p>
+<p>Get the light sensor’s value<br><code>adc_sensors.value(ANALOG_GROVE_LIGHT);</code></p>
+<ul>
+<li><strong>Network stack</strong></br></li>
+</ul>
+<p>I divided the function of implementing the project into four parts:</p>
+<p><img src="/images/wsnimg/wsn1.png" alt=""></p>
+<p>1) The light sensor and temperature sensor are connected to the transmitter. The sensor data, room occupancy and a counter data are stored in the structure message.<br>2) If the button is not pressed, it means that the room is not occupied. The transmitter will periodically send these data to the receiver every five seconds.<br>3) If the button is pressed, it means that the room is occupied, and the state of the button determines whether the data will be sent.<br>4) The button of the receiver can also request the occupancy status of the transmitter’s room. If the room is not occupied, then the receiver’s button will troggle the transmitter’s LED , otherwise it will not.</p>
+<h5 id="Transmitter"><a href="#Transmitter" class="headerlink" title="Transmitter"></a>Transmitter</h5><p><img src="/images/wsnimg/transmitter.png" alt=""></p>
+<p>For the sender I have four “create”</p>
+<p>1) UDP connection: First register a UDP connection and attach a callback function to it. For the incoming data packet, the callback function will be called, and then the UDP data packet will be sent to the specified IP address.<br>2) A structure and a pointer: Pack and store data such as sensor data and room occupancy status.<br>3) Receiver callback: It will be called by UDP library each time we receive a packet.<br>4) Sensor values’ function: Get the functions of the light sensor, temperature sensor and counter for easily use.</p>
+<p>First of all, my transmitter will set periodic time , register the UDP connection and activate the light sensor. Then the program will enter a while (1) in an infinite loop, here is the default. In this infinite loop my transmitter has been working then, for the working state, one is that the button is not pressed, and the other is that the button is pressed.</p>
+<p>Both of these working states will first create a link-local multicast address to all nodes.</p>
+<p>For the working state where the button is not pressed, the transmitter will send data periodically every five seconds. In this working state, its LED will be troggled by the receiver’s button.</p>
+<p>For the working state where the button is pressed, it will read the time when the button is pressed and released, and print the time, and only send data when the key is pressed.In this working state, its led will not be troggled by the receiver’s button.</p>
+<p>After judging the working status, it will take sensor readings and store them into the message structure and then send a UDP packet to a specified IP address. Finally reset timer.</p>
+<h5 id="Receiver"><a href="#Receiver" class="headerlink" title="Receiver"></a>Receiver</h5><p><img src="/images/wsnimg/receiver.png" alt=""><br>For the receiver, it has only one working mode, receiving the data packet of the sender, in addition, it can also query the occupancy status of the sender’s room through its buttons and callback functions.</p>
+<p>1)For the simple_udp_register() function, the declaration of the function is declared in the simple-udp.h header file to register a UDP connection. The receive_callback is a pointer to a function that will be called when a packet is received<br>Return value:  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0, UDP connection cannot be allocated</span><br><span class="line">1, connection successfully allocated</span><br></pre></td></tr></table></figure>
+<p>This function registers a UDP connection and attaches a callback function to it. This callback function will be called when a data packet arrives. The local UDP port can be set to 0 to indicate that a temporary UDP port should be assigned. The remote IP address can be empty, indicating that packets from any IP address should be accepted.</p>
+<p>2)For the <code>simple_udp_sendto()</code> function ,The sending of data packets is performed by the Socknet interface function <code>uip_udp_packnet_sendto()</code>in contiki. Contiki uses the event mechanism to achieve data reception. When the tcpip_event event is triggered in the system, the system will automatically call the response function to process the received data.</p>
+<p>3)For the <code>uip_create_linklocal_allnodes_mcast()</code> function.In the uip.h file, the prototype of the <code>uip_create_linklocal_allnodes_mcast()</code>function is defined as follows:<br><code>#define uip_create_linklocal_allnodes_mcast(a) uip_ip6addr(a,0xff02,0,0,0,0,0,0,0x0001)</code><br>The function has a formal parameter a, which represents the multicast address of all nodes connected to the local. The multicast address is represented by 8 hexadecimal numbers.</p>
+<p>4)After the broadcast_example_process process starts, directly enter the core part, first register a UDP connection, establish a remote connection of the same device, and bind the communication port, specify the callback function for RF data reception. Set the sending timer to trigger system timing events at intervals; then, the system enters an infinite loop to listen to system events. If it is a sending timer event, reset the sending timer and set another timer for data sending; if new The timer triggers a timed event, set a broadcast address through <code>uip_create_linklocal_allnodes_mcast()</code>, and then call the <code>simple_udp_sendto()</code> function to send the packet in a multicast manner.</p>
+<h3 id="system-analysis"><a href="#system-analysis" class="headerlink" title="system analysis"></a><strong>system analysis</strong></h3><p><strong>(a)Communication range of individual nodes</strong></p>
+<p>According to the equation below, Because the propagation model only describes the laws that electromagnetic waves follow during transmission, and has nothing to do with the characteristics of the transmitter and receiver, so the antenna gain is not considered here.<br><img src="/images/wsnimg/formula1.png" alt=""></p>
+<p>So we can get the equation below , If the unit of f is Mhz, the unit of d is Km.<br><img src="/images/wsnimg/formula2.png" alt=""></p>
+<p>From the data sheet of Zolertia Firefly Revision A2 ,we can get the receiver sensitivity is -97dBm and programmable output power is 7dBm,so the pathloss is 104dB and distance is 0.7 Km.</p>
+<p><strong>(b)Battery lifetime</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(a) Active Mode: 20mA. </span><br><span class="line">(b) Power Mode 1 (4µs wake-up):0.6mA. </span><br><span class="line">(c) Power Mode 2 (sleep timer running and 16KB RAM retention): 1.3µA. </span><br><span class="line">(d) Power Mode 3 (external interrupt and 16KB RAM retention): 0.4 µA.</span><br></pre></td></tr></table></figure>
+<p>And its power down: 0.12 µA, 0.5 µA with Wake-On radio (eWOR).</p>
+<p>If I use a AA/AAA NiCd batteries, their total capacity is 210mAh, we assume a duty cycle of 1%, then in the ideal case, regardless of battery loss , The usage time of the device is:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Active Mode : 210mAh &#x2F; (20*1%+0.12*E-3*99%)&#x3D;1049.4 hour</span><br><span class="line">Power Model 1 : 210mAh &#x2F; (0.6*1%+0.5*E-3*99%) &#x3D; 32332.6 hour</span><br><span class="line">Power Model 2 : 210mAh &#x2F; (1.3*1%*E-3+0.5*E-3*99%) &#x3D; 413385.8 hour</span><br><span class="line">Power Model 3 : 210mAh &#x2F; (0.4*1%*E-3+0.5*E-3*99%) 420841.7  hour</span><br></pre></td></tr></table></figure>
+
+<p><strong>(c)Scalability</strong><br>If we place the wireless sensor nodes in multiple rooms and multiple floors, according to multicast method I use. First of all, it is a one-to-one group transmission mode, which is different from broadcasting, in the same subnet. Only the hosts participating in the multicast group will receive the packet, and the other hosts will not be interfered. Second, the packet will be forwarded to the hosts in the same group on another subnet through the router.Therefore, in terms of scalability, multicast requires clients of the same data stream to join the same group to share a data stream, saving the load of the server. Have the advantages of broadcasting.</p>
+<p>But compared with unicast, multicast has no error correction mechanism in its protocol index, and it is difficult to remedy after packet loss and error. I think it can be replaced by a certain fault tolerance mechanism. The fault-tolerance mechanism can reduce the vulnerability of the system and make the system reliable and stable. For example, when nodes that seem to be unable to communicate are encountered: 1 stop communication directly 2 communicate only nodes that can communicate 3 communicate in another way 4 pseudo-communication.</p>
+<p>Another issue to face is battery life. Based on the above calculations, in active mode, its working time is 1049 hours, about 43 days. This is a reasonable situation. This means that the battery needs to be replaced frequently. Therefore, for nodes of different work types, we need to use different work modes. In addition, we can also introduce a sensor sleep mechanism to reduce power consumption. In order to prevent sensor nodes from wasting energy when receiving unexpected data packets, we can consider the sleep mechanism. For example, coordinate strategies to determine which nodes should go to sleep.</p>
+<p>In the case of more than multiple nodes, we can use a stump topology to connect these nodes. This method not only ensures a large network coverage, but also does not prevent the battery life from being too short, more flexible and efficient.</p>
+<h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a><strong>Result</strong></h3><p><img src="/images/wsnimg/toutput.png" alt=""><br><img src="/images/wsnimg/routput.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hardware/" rel="tag"># Hardware</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/26/702/" rel="next" title="jQuery对表单的操作及更多应用">
+                <i class="fa fa-chevron-left"></i> jQuery对表单的操作及更多应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/logo.png"
+                alt="Ziqin Tang" />
+            
+              <p class="site-author-name" itemprop="name">Ziqin Tang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hhhtzq" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:tang.ziqin.personal@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Technologies"><span class="nav-number">2.</span> <span class="nav-text">Technologies</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1️⃣-Sensor-node-platform"><span class="nav-number">2.1.</span> <span class="nav-text">1️⃣ Sensor node platform</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2️⃣-Light-sensor-5516-Photoresistor-Light-Sensor-Module"><span class="nav-number">2.2.</span> <span class="nav-text">2️⃣ Light sensor(5516 Photoresistor Light Sensor Module)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3️⃣-Protocols"><span class="nav-number">2.3.</span> <span class="nav-text">3️⃣ Protocols</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementation"><span class="nav-number">3.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Transmitter"><span class="nav-number">3.0.1.</span> <span class="nav-text">Transmitter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Receiver"><span class="nav-number">3.0.2.</span> <span class="nav-text">Receiver</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#system-analysis"><span class="nav-number">4.</span> <span class="nav-text">system analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Result"><span class="nav-number">5.</span> <span class="nav-text">Result</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-fighter-jet"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ziqin</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
